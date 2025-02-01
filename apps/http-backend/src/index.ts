@@ -82,24 +82,25 @@ app.post("/room",middleware,async (req,res)=>{
         })
         return
     }
-    //db call
-    
-
     //@ts-ignore
     const userId= req.userId
+    try {
+         const room =await prismaClient.room.create({
+        data: {
+                    slug: parsedData.data.name,
+                    adminId: userId,
+             },
+                                            });
 
-
-    console.log("Before DB Call");
-await prismaClient.room.create({
-    data: {
-        slug: parsedData.data.name,
-        adminId: userId,
-    },
-});
-console.log("After DB Call");
     res.json({
-        roomId:123
+        roomId:room.id
     })
+    } catch (e) {
+        res.status(411).json({
+            message:"room already exists"
+        })
+    }
+   
 
     
     
