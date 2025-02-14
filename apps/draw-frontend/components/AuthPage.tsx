@@ -5,7 +5,7 @@ export function AuthPage({isSignin}:{isSignin:boolean}){
         <div className="p-2 m-2 bg-white rounded">
             <div><input type="text" placeholder="Email"></input></div>
             <div><input type="password" placeholder="password"></input></div>
-            <button onClick={()=>{
+            <button className="text-yellow-800" onClick={()=>{
 
             }}>{isSignin ? "sign in":"sign up"}</button>
         </div>
